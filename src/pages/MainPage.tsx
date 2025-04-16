@@ -1,11 +1,10 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import AppLayout from "@/components/layout/AppLayout";
 import SearchBar from "@/components/main/SearchBar";
-import { CardReport } from "@/components/ui/card-report";
 import ModelCard from "@/components/main/ModelCard";
 import { useModelData } from "@/contexts/ModelDataContext";
+import BenchmarkButton from "@/components/main/BenchmarkButton";
 
 const MainPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,35 +19,45 @@ const MainPage = () => {
     // Implement benchmark logic here
   };
 
-  const owenModel = models.find(model => model.name === 'Owen');
-  const llamaModel = models.find(model => model.name === 'Llama');
+  const filteredModels = models.filter(model => 
+    model.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <AppLayout>
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-full max-w-md mb-6">
+      <div className="space-y-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 className="text-2xl font-bold text-gray-800">LLM Model Evaluation</h1>
+          <div className="w-full max-w-md">
             <SearchBar onSearch={handleSearch} />
           </div>
-          <Button 
-            className="bg-jetson-blue hover:bg-blue-600 text-white font-medium"
-            onClick={handleRunBenchmark}
-          >
-            Run Benchmark
-          </Button>
+        </div>
+        
+        <div className="flex flex-col items-center py-6">
+          <div className="mb-2 text-center max-w-lg">
+            <p className="text-gray-600 mb-6">
+              Run benchmarks across all configured LLM models to compare their performance metrics.
+            </p>
+          </div>
+          <BenchmarkButton onClick={handleRunBenchmark} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {models.map((model) => (
-            <ModelCard
-              key={model.id}
-              id={model.id}
-              name={model.name}
-              version={model.version}
-              lastRun={model.lastRun}
-            />
-          ))}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Available Models</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredModels.map((model) => (
+              <ModelCard
+                key={model.id}
+                id={model.id}
+                name={model.name}
+                version={model.version}
+                lastRun={model.lastRun}
+              />
+            ))}
+          </div>
         </div>
-      </AppLayout>
+      </div>
+    </AppLayout>
   );
 };
 

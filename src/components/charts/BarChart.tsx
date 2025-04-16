@@ -1,5 +1,5 @@
 
-import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 interface BarChartProps {
   data: Array<{ name: string; value: number }>;
@@ -7,13 +7,41 @@ interface BarChartProps {
 
 const BarChart = ({ data }: BarChartProps) => {
   return (
-    <div className="h-40 w-full">
+    <div className="h-60 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsBarChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-          <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-          <YAxis tick={{ fontSize: 10 }} />
-          <Tooltip />
-          <Bar dataKey="value" fill="#333333" barSize={20} />
+        <RechartsBarChart 
+          data={data} 
+          margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+          barSize={38}
+        >
+          <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+          <XAxis 
+            dataKey="name" 
+            tick={{ fontSize: 12, fill: "#555" }}
+            tickLine={false}
+            axisLine={{ stroke: "#E5E7EB" }}
+          />
+          <YAxis 
+            tick={{ fontSize: 12, fill: "#555" }}
+            tickLine={false}
+            axisLine={{ stroke: "#E5E7EB" }}
+            tickFormatter={(value) => `${value}%`}
+          />
+          <Tooltip 
+            cursor={{ fill: "rgba(180, 151, 240, 0.1)" }}
+            contentStyle={{ 
+              backgroundColor: "#fff", 
+              borderRadius: "8px", 
+              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+              border: "none"
+            }}
+          />
+          <Bar 
+            dataKey="value" 
+            fill="#B397EF" 
+            radius={[4, 4, 0, 0]}
+            animationDuration={1500}
+          />
         </RechartsBarChart>
       </ResponsiveContainer>
     </div>
