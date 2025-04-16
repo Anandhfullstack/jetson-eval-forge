@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -54,15 +53,14 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				jetson: {
-					purple: '#8B5CF6',     // Vivid Purple
-					pink: '#D946EF',       // Magenta Pink
-					orange: '#F97316',     // Bright Orange
-					blue: '#0EA5E9',       // Ocean Blue
-					gold: '#F9DBA5',       // Keep existing gold
+					pink: '#FFDEDE',
+					gold: '#F9DBA5',
+					blue: '#4285F4',
+					purple: '#B397EF',
 					chart: {
-						line: '#8B5CF6',   // Vivid Purple for line charts
-						pie: '#D946EF',    // Magenta Pink for pie charts
-						bar: '#0EA5E9'     // Ocean Blue for bar charts
+						line: '#B397EF',
+						pie: '#333333',
+						bar: '#333333'
 					}
 				},
 				sidebar: {
@@ -107,4 +105,3 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-

@@ -8,7 +8,7 @@ interface BenchmarkButtonProps {
 const BenchmarkButton = ({ onClick }: BenchmarkButtonProps) => {
   return (
     <Button 
-      className="bg-jetson-purple hover:bg-jetson-purple/90 text-white font-medium px-6 py-2 btn-vibrant"
+      className="bg-jetson-blue hover:bg-blue-600 text-white font-medium px-6 py-2"
       onClick={onClick}
     >
       Run Benchmark
@@ -17,4 +17,3 @@ const BenchmarkButton = ({ onClick }: BenchmarkButtonProps) => {
 };
 
 export default BenchmarkButton;
-

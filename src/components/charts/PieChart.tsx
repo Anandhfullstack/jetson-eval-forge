@@ -5,7 +5,7 @@ interface PieChartProps {
   data: Array<{ name: string; value: number }>;
 }
 
-const COLORS = ['#8B5CF6', '#D946EF', '#F97316', '#0EA5E9']; // Vivid Purple, Magenta Pink, Bright Orange, Ocean Blue
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const PieChart = ({ data }: PieChartProps) => {
   return (
@@ -32,4 +32,3 @@ const PieChart = ({ data }: PieChartProps) => {
 };
 
 export default PieChart;
-
