@@ -52,6 +52,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				jetson: {
+					pink: '#FFDEDE',
+					gold: '#F9DBA5',
+					blue: '#4285F4',
+					purple: '#B397EF',
+					chart: {
+						line: '#B397EF',
+						pie: '#333333',
+						bar: '#333333'
+					}
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
