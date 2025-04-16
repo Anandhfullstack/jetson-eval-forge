@@ -13,7 +13,7 @@ const BarChart = ({ data }: BarChartProps) => {
           <XAxis dataKey="name" tick={{ fontSize: 10 }} />
           <YAxis tick={{ fontSize: 10 }} />
           <Tooltip />
-          <Bar dataKey="value" fill="#333333" barSize={20} />
+          <Bar dataKey="value" fill="#0EA5E9" barSize={20} /> {/* Ocean Blue */}
         </RechartsBarChart>
       </ResponsiveContainer>
     </div>
@@ -21,3 +21,4 @@ const BarChart = ({ data }: BarChartProps) => {
 };
 
 export default BarChart;
+

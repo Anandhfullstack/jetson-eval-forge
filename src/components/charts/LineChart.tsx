@@ -16,9 +16,9 @@ const LineChart = ({ data }: LineChartProps) => {
           <Line 
             type="monotone" 
             dataKey="value" 
-            stroke="#B397EF" 
+            stroke="#8B5CF6"  // Vivid Purple 
             strokeWidth={2} 
-            dot={{ fill: "#B397EF", r: 4 }}
+            dot={{ fill: "#8B5CF6", r: 4 }}
             activeDot={{ r: 6 }}
           />
         </RechartsLineChart>
@@ -28,3 +28,4 @@ const LineChart = ({ data }: LineChartProps) => {
 };
 
 export default LineChart;
+
