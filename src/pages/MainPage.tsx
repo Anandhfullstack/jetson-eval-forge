@@ -1,21 +1,22 @@
-
 import { useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import SearchBar from "@/components/main/SearchBar";
 import ModelCard from "@/components/main/ModelCard";
 import { useModelData } from "@/contexts/ModelDataContext";
 import BenchmarkButton from "@/components/main/BenchmarkButton";
+import BenchmarkModal from "@/components/main/BenchmarkModal";
 
 const MainPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const { models } = useModelData();
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
   };
 
-  const handleRunBenchmark = () => {
-    console.log("Running benchmark...");
+  const handleStartBenchmark = (formValues: any) => {
+    console.log("Starting benchmark with values:", formValues);
     // Implement benchmark logic here
   };
 
@@ -39,7 +40,7 @@ const MainPage = () => {
               Run benchmarks across all configured LLM models to compare their performance metrics.
             </p>
           </div>
-          <BenchmarkButton onClick={handleRunBenchmark} />
+          <BenchmarkButton onClick={() => setModalOpen(true)} />
         </div>
 
         <div>
@@ -56,6 +57,12 @@ const MainPage = () => {
             ))}
           </div>
         </div>
+
+        <BenchmarkModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          onSubmit={handleStartBenchmark}
+        />
       </div>
     </AppLayout>
   );
