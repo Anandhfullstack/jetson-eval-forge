@@ -71,10 +71,12 @@ import SearchBar from "@/components/main/SearchBar";
 import ModelCard from "@/components/main/ModelCard";
 import { useModelData } from "@/contexts/ModelDataContext";
 import BenchmarkButton from "@/components/main/BenchmarkButton";
+import BenchmarkModal from "@/components/main/BenchmarkModal";
 import BenchmarkModal, { FormValues } from "@/components/main/BenchmarkModal";
 
 const MainPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   // NEW: track whether a benchmark is in flight
