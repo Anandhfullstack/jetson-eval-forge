@@ -11,7 +11,7 @@ const NavBar = () => {
       <div className="container mx-auto max-w-7xl flex justify-between items-center">
         <div className="flex items-center">
           <div className="mr-8 text-xl font-bold text-gray-800">
-            Jetson<span className="text-jetson-blue">LLM</span>
+            Axiomtek<span className="text-jetson-blue">EvalKit</span>
           </div>
           <div className="hidden md:flex space-x-1">
             <NavLink to="/" active={location.pathname === '/'}>
