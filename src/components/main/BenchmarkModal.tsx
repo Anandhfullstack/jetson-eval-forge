@@ -30,8 +30,8 @@ import { Button } from "@/components/ui/button";
 const formSchema = z.object({
   model: z.string().min(1, "Please select a model"),
   maxCompletedRequests: z.number().min(1, "Must be at least 1"),
-  requestIntervalType: z.enum(["gamma", "poisson", "uniform"]),
-  requestLengthType: z.enum(["zipf", "uniform", "fixed"]),
+  requestIntervalGeneratorType: z.enum(["gamma", "poisson", "uniform"]),
+  requestLengthGeneratorType: z.enum(["zipf", "uniform", "fixed"]),
   maxTokens: z.number().min(1, "Must be at least 1"),
 });
 
@@ -49,8 +49,8 @@ const BenchmarkModal = ({ open, onOpenChange, onSubmit }: BenchmarkModalProps) =
     defaultValues: {
       model: "meta-llama/Llama-3.2-1B-Instruct",
       maxCompletedRequests: 20,
-      requestIntervalType: "gamma",
-      requestLengthType: "zipf",
+      requestIntervalGeneratorType: "gamma",
+      requestLengthGeneratorType: "zipf",
       maxTokens: 8192,
     },
   });
@@ -118,7 +118,7 @@ const BenchmarkModal = ({ open, onOpenChange, onSubmit }: BenchmarkModalProps) =
 
             <FormField
               control={form.control}
-              name="requestIntervalType"
+              name="requestIntervalGeneratorType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Request Interval Generator Type</FormLabel>
@@ -141,7 +141,7 @@ const BenchmarkModal = ({ open, onOpenChange, onSubmit }: BenchmarkModalProps) =
 
             <FormField
               control={form.control}
-              name="requestLengthType"
+              name="requestLengthGeneratorType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Request Length Generator Type</FormLabel>

@@ -7,6 +7,14 @@ import { useModelData } from "@/contexts/ModelDataContext";
 import BenchmarkButton from "@/components/main/BenchmarkButton";
 import BenchmarkModal from "@/components/main/BenchmarkModal";
 
+// Define FormValues type directly - matching curl command format
+type FormValues = {
+  model: string;
+  maxCompletedRequests: number;
+  requestIntervalGeneratorType: "gamma" | "poisson" | "uniform"; // Changed from requestIntervalType
+  requestLengthGeneratorType: "zipf" | "uniform" | "fixed";      // Changed from requestLengthType
+  maxTokens: number;
+};
 
 const MainPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,22 +32,58 @@ const MainPage = () => {
     setSearchTerm(value);
   };
 
-  // UPDATED: async function that POSTS to your Express backend
+  // UPDATED: async function that POSTS to match curl command format
   const handleStartBenchmark = async (formValues: FormValues) => {
     setLoading(true);
     setResults(null);
+    
+    // Convert form values to match the curl command format
+    const requestData = {
+      model: formValues.model,
+      maxCompletedRequests: formValues.maxCompletedRequests,
+      requestIntervalGeneratorType: formValues.requestIntervalGeneratorType,
+      requestLengthGeneratorType: formValues.requestLengthGeneratorType,
+      maxTokens: formValues.maxTokens
+    };
+    
     try {
+      console.log("Sending request:", JSON.stringify(requestData, null, 2));
+      
       const res = await fetch("/benchmark", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify(requestData),
       });
-      const payload = await res.json();
+      
+      // Log response status and headers
+      console.log("Response status:", res.status);
+      console.log("Response headers:", Object.fromEntries([...res.headers.entries()]));
+      
+      // First check if the response is ok
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`API responded with ${res.status}: ${errorText}`);
+      }
+      
+      // Get the raw text first to check for valid JSON
+      const responseText = await res.text();
+      console.log("Raw response:", responseText);
+      
+      // Try to parse the JSON
+      let payload;
+      try {
+        payload = JSON.parse(responseText);
+      } catch (jsonError) {
+        throw new Error(`Invalid JSON response: ${responseText.substring(0, 100)}...`);
+      }
+      
       if (!payload.success) {
         throw new Error(payload.error || "Benchmark failed");
       }
+      
       setResults(payload.results);
     } catch (err: any) {
+      console.error("Benchmark error:", err);
       alert("Error running benchmark:\n" + err.message);
     } finally {
       setLoading(false);
@@ -75,9 +119,7 @@ const MainPage = () => {
           <BenchmarkButton
             onClick={() => setModalOpen(true)}
             disabled={loading}
-          >
-            {loading ? "Running…" : "Run Benchmark"}
-          </BenchmarkButton>
+          />
         </div>
 
         {/* Available Models */}
@@ -91,7 +133,7 @@ const MainPage = () => {
                 key={model.id}
                 id={model.id}
                 name={model.name}
-                version={model.version}
+                version={model.version || ""}
                 lastRun={model.lastRun}
               />
             ))}
