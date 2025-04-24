@@ -1,11 +1,11 @@
-
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 interface BarChartProps {
   data: Array<{ name: string; value: number }>;
+  color?: string;
 }
 
-const BarChart = ({ data }: BarChartProps) => {
+const BarChart = ({ data, color = "#B397EF" }: BarChartProps) => {
   return (
     <div className="h-60 w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -25,10 +25,10 @@ const BarChart = ({ data }: BarChartProps) => {
             tick={{ fontSize: 12, fill: "#555" }}
             tickLine={false}
             axisLine={{ stroke: "#E5E7EB" }}
-            tickFormatter={(value) => `${value}%`}
+            tickFormatter={(value) => `${value}`}
           />
           <Tooltip 
-            cursor={{ fill: "rgba(180, 151, 240, 0.1)" }}
+            cursor={{ fill: `${color}20` }}
             contentStyle={{ 
               backgroundColor: "#fff", 
               borderRadius: "8px", 
@@ -38,7 +38,7 @@ const BarChart = ({ data }: BarChartProps) => {
           />
           <Bar 
             dataKey="value" 
-            fill="#B397EF" 
+            fill={color} 
             radius={[4, 4, 0, 0]}
             animationDuration={1500}
           />

@@ -17,7 +17,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       </main>
       <footer className="py-4 text-center text-sm text-gray-500">
         <div className="container mx-auto">
-          Jetson LLM Evaluation Kit © {new Date().getFullYear()}
+          Axiomtek LLM Evaluation Kit © {new Date().getFullYear()}
         </div>
       </footer>
     </div>

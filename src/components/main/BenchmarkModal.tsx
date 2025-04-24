@@ -88,6 +88,11 @@ const BenchmarkModal = ({ open, onOpenChange, onSubmit }: BenchmarkModalProps) =
                       <SelectItem value="meta-llama/Llama-3.2-1B-Instruct">
                         Llama 3.2 1B Instruct
                       </SelectItem>
+                      <SelectItem value="Qwen/Qwen2.5-0.5B">
+                      Qwen2.5-0.5B
+                      </SelectItem>
+
+                      
                       {/* Add more models here */}
                     </SelectContent>
                   </Select>

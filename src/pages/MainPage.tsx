@@ -49,7 +49,7 @@ const MainPage = () => {
     try {
       console.log("Sending request:", JSON.stringify(requestData, null, 2));
       
-      const res = await fetch("/benchmark", {
+      const res = await fetch("http://localhost:3000/benchmark", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestData),
@@ -133,7 +133,7 @@ const MainPage = () => {
                 key={model.id}
                 id={model.id}
                 name={model.name}
-                version={model.version || ""}
+                version={model.version}
                 lastRun={model.lastRun}
               />
             ))}
